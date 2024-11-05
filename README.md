@@ -23,8 +23,7 @@ aws s3 ls | awk '{print $NF}'
 
 ### Terraform
 
-- https://github.com/hashicorp/hcl
-- https://developer.hashicorp.com/terraform/intro/core-workflow
+Acessar a pasta ```shared``` no container
 
 ```sh
 terraform init
@@ -55,3 +54,5 @@ terraform graph
 ## References
 
 - https://www.xcubelabs.com/blog/gitops-explained-a-comprehensive-guide/
+- https://github.com/hashicorp/hcl
+- https://developer.hashicorp.com/terraform/intro/core-workflow
