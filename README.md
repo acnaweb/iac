@@ -1,5 +1,10 @@
-# DSA - IaC com Terraform, AWS, Azure e Databricks
+# IaC
 
+Infrastructure as Code
+
+## Instructions
+
+### Docker
 
 ```sh
 docker build -t devops .
