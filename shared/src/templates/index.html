@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>DSA - Lab 4</title>
+</head>
+<body>
+    <div style="text-align: center;">
+        <h1>Data Science Academy</h1>
+        <h2>Modelo de Machine Learning Para Prever Se o Cliente Fará Uma Próxima Compra</h2>
+        <h3>Digite Abaixo o Valor das Últimas 4 Compras do Cliente</h3>
+        <form action="/predict" method="post">
+            <input type="text" name="regra" placeholder="Regra" required="required" />
+            <button type="submit">Prever</button>
+        </form>
+
+        {% if prediction_text %}
+            <h3>{{ prediction_text }}</h3>
+        {% endif %}
+    </div>
+</body>
+</html>
