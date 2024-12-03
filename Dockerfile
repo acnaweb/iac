@@ -6,7 +6,9 @@ LABEL maintainer="acnaweb"
 
 # Atualizar os pacotes do sistema e instalar dependências necessárias
 RUN apt-get update && \
-    apt-get install -y wget unzip curl openssh-client iputils-ping groff nano
+    apt-get install -y wget unzip curl \
+    openssh-client iputils-ping groff nano \
+    telnet git
 
 # Definir a versão do Terraform (ajuste conforme necessário)
 ENV TERRAFORM_VERSION=1.6.4
