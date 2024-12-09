@@ -11,7 +11,7 @@ RUN apt-get update && \
     telnet git
 
 # Definir a versão do Terraform (ajuste conforme necessário)
-ENV TERRAFORM_VERSION=1.6.4
+ENV TERRAFORM_VERSION=1.7.5
 
 # Baixar e instalar Terraform
 RUN wget https://releases.hashicorp.com/terraform/${TERRAFORM_VERSION}/terraform_${TERRAFORM_VERSION}_linux_amd64.zip && \
