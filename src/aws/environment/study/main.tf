@@ -1,10 +1,14 @@
-# module "storage" {
-#     source = "../../modules/storage/marketmining-public"  
-# }
+module "storage" {
+    source = "../../modules/storage"  
+
+    project_name = var.project_name
+    environment = var.environment
+}
 
 
 module "network" {
-    source = "../../modules/network/vpc"     
+    source = "../../modules/network/vpc"  
+
     project_name = var.project_name
     environment = var.environment
     azs = var.azs
