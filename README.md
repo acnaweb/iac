@@ -2,6 +2,10 @@
 
 Infrastructure as Code
 
+## AWS
+
+![](assets/images/aws-tags.png)
+
 ## Instructions
 
 ### Docker
@@ -56,3 +60,9 @@ terraform graph
 - https://www.xcubelabs.com/blog/gitops-explained-a-comprehensive-guide/
 - https://github.com/hashicorp/hcl
 - https://developer.hashicorp.com/terraform/intro/core-workflow
+- https://www.baeldung.com/ops/terraform-best-practices
+- https://github.com/GoogleCloudPlatform/notebooks-blueprint-security
+- https://medium.com/@mlabouardy/aws-tagging-best-practices-dcc9a6dd29af
+- https://spacelift.io/blog/terraform-tags
+- https://spacelift.io/blog/terraform-best-practices
+- https://spacelift.io/blog/importing-exisiting-infrastructure-into-terraform

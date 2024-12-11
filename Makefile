@@ -1,3 +1,3 @@
 iac:
 	docker build -t iac .
-	docker run --name iac -it --rm -v ./src:/shared devops /bin/bash
+	docker run --name iac -it --rm -v ./src:/shared iac /bin/bash
