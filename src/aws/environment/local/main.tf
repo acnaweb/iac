@@ -14,6 +14,7 @@ module "vpc" {
     azs = var.azs
     vpc_cidr_block = var.vpc_cidr_block
     private_subnets = var.private_subnets
+    public_subnets = var.public_subnets
 }
 
 module "security-group" {

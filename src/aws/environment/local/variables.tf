@@ -14,12 +14,14 @@ variable "common_tags" {
 
 # Network
 
-variable "vpc_cidr_block" {
-}
+variable "vpc_cidr_block" {}
 
 variable "private_subnets" {
   type = list(string) 
-  default = [""] 
+}
+
+variable "public_subnets" {
+  type = list(string) 
 }
 
 variable "azs" {
