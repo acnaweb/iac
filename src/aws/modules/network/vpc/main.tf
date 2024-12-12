@@ -59,6 +59,8 @@ resource "aws_subnet" "public_subnets" {
 
     availability_zone = element(var.azs, count.index)
 
+    map_public_ip_on_launch = true
+
     tags = {
         Name = "${var.project_name}-${var.environment}-public_subnets"
     }  
