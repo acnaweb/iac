@@ -1,25 +1,20 @@
-# # Configure the AWS Provider
-# provider "aws" {
-#   region = "us-east-1"
-# }
-
-resource "aws_security_group" "default" {
-    name = "${var.project_name}-${var.environment}-security-group"
+resource "aws_security_group" "lb" {
+    name = "${var.project_name}-${var.environment}-lb-sg"
 
     vpc_id = var.vpc_id
   
     tags = {
-        Name = "${var.project_name}-${var.environment}-security-group"
+        Name = "${var.project_name}-${var.environment}-lb-sg"
     }  
 
     # Opção para revogar regras de segurança ao deletar o grupo de segurança
     revoke_rules_on_delete = true
 
-    description = "Custom security group"
+    description = "Load Balance security group"
 }
 
-resource "aws_security_group_rule" "ssh" {
-    security_group_id = aws_security_group.default.id
+resource "aws_security_group_rule" "lb_ssh" {
+    security_group_id = aws_security_group.lb.id
     
     type = "ingress"
     protocol = "tcp"
@@ -29,8 +24,8 @@ resource "aws_security_group_rule" "ssh" {
     description = "SSH connection"
 }
 
-resource "aws_security_group_rule" "http" {
-    security_group_id = aws_security_group.default.id
+resource "aws_security_group_rule" "lb_http" {
+    security_group_id = aws_security_group.lb.id
     
     type = "ingress"
     protocol = "tcp"
@@ -40,8 +35,8 @@ resource "aws_security_group_rule" "http" {
     description = "Http connection"       
 }
 
-resource "aws_security_group_rule" "https" {
-    security_group_id = aws_security_group.default.id
+resource "aws_security_group_rule" "lb_https" {
+    security_group_id = aws_security_group.lb.id
     
     type = "ingress"
     protocol = "tcp"
@@ -51,8 +46,8 @@ resource "aws_security_group_rule" "https" {
     description = "Https connection"       
 }
 
-resource "aws_security_group_rule" "all-egress" {
-    security_group_id = aws_security_group.default.id
+resource "aws_security_group_rule" "lb_outbound" {
+    security_group_id = aws_security_group.lb.id
     
     type = "egress"
     protocol = -1
