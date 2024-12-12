@@ -6,7 +6,7 @@ module "storage" {
 }
 
 
-module "network" {
+module "vpc" {
     source = "../../modules/network/vpc"  
 
     project_name = var.project_name
@@ -16,13 +16,21 @@ module "network" {
     private_subnets = var.private_subnets
 }
 
-
-
 module "security-group" {
     source = "../../modules/network/security_group"
 
-    depends_on = [ module.network ] 
+    depends_on = [ module.vpc ] 
     project_name = var.project_name
     environment = var.environment
-    vpc_id = module.network.vpc_id
+    vpc_id = module.vpc.vpc_id
+}
+
+module "load-balancer" {
+    source = "../../modules/network/load_balancer"  
+    depends_on = [ module.security-group, module.vpc ]
+
+    project_name = var.project_name
+    environment = var.environment
+    public_subnets = module.vpc.public_subnets
+    security_group_id = module.security-group.lb_sg_id
 }
