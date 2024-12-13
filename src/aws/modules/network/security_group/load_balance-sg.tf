@@ -1,5 +1,5 @@
 resource "aws_security_group" "lb" {
-    name = "${var.project_name}-${var.environment}-lb-sg"
+    name = "${var.project_name}-${var.environment}"
 
     vpc_id = var.vpc_id
   
@@ -24,26 +24,17 @@ resource "aws_security_group_rule" "lb_ssh" {
     description = "SSH connection"
 }
 
-resource "aws_security_group_rule" "lb_http" {
-    security_group_id = aws_security_group.lb.id
-    
-    type = "ingress"
-    protocol = "tcp"
-    from_port = 80
-    to_port = 80
-    cidr_blocks = ["0.0.0.0/0"]
-    description = "Http connection"       
-}
+resource "aws_security_group_rule" "lb_all_ingress" {
+    count = length(var.target_ports)
 
-resource "aws_security_group_rule" "lb_https" {
     security_group_id = aws_security_group.lb.id
     
     type = "ingress"
     protocol = "tcp"
-    from_port = 81
-    to_port = 81
+    from_port = element(var.target_ports, count.index)
+    to_port = element(var.target_ports, count.index)
     cidr_blocks = ["0.0.0.0/0"]
-    description = "Https connection"       
+    description = "TCP connection port=${element(var.target_ports, count.index)}"       
 }
 
 resource "aws_security_group_rule" "lb_outbound" {

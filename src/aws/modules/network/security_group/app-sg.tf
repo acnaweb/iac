@@ -4,7 +4,7 @@
 # }
 
 resource "aws_security_group" "app" {
-    name = "${var.project_name}-${var.environment}-app-sg"
+    name = "${var.project_name}-${var.environment}"
 
     vpc_id = var.vpc_id
   
