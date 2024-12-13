@@ -29,3 +29,6 @@ variable "azs" {
   type = list(string)   
 }
 
+variable "target_ports" {
+    type = list(number)
+}
