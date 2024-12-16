@@ -39,3 +39,11 @@ module "load-balancer" {
     security_group_id = module.security-group.lb_sg_id
     target_ports = var.target_ports  
 }
+
+module "ecs" {
+    source = "../../modules/container/ecs"
+    depends_on = [ module.security-group, module.vpc ]
+
+    project_name = var.project_name
+    environment = var.environment
+}

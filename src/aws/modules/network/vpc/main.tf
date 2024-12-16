@@ -1,6 +1,14 @@
+# ********************************************************************
+# Variables
+
 locals {
     len_private_subnets = length(var.private_subnets)
+
     len_public_subnets = length(var.public_subnets)
+
+    create_private_subnet = length(var.private_subnets) > 0
+
+    create_public_subnet = length(var.public_subnets) > 0
 }
 
 # ********************************************************************
@@ -8,6 +16,8 @@ locals {
 
 resource "aws_vpc" "default" {
     cidr_block = var.vpc_cidr_block 
+    enable_dns_hostnames = true
+    enable_dns_support = true
          
     tags = {
         Name = "${var.project_name}-${var.environment}-vpc"
@@ -18,7 +28,7 @@ resource "aws_vpc" "default" {
 # Private Subnet
 
 resource "aws_subnet" "private_subnets" {
-    count = local.len_private_subnets
+    count = local.create_private_subnet ? local.len_private_subnets : 0
 
     vpc_id = aws_vpc.default.id
 
@@ -32,6 +42,8 @@ resource "aws_subnet" "private_subnets" {
 }
 
 resource "aws_route_table" "private" {
+    count = local.create_private_subnet ? 1 : 0
+
     vpc_id = aws_vpc.default.id
     
     tags = {
@@ -40,18 +52,18 @@ resource "aws_route_table" "private" {
 }
 
 resource "aws_route_table_association" "private" {
-    count = local.len_private_subnets
+    count = local.create_private_subnet ? local.len_private_subnets : 0
     
     subnet_id = element(aws_subnet.private_subnets[*].id, count.index)
 
-    route_table_id = aws_route_table.private.id
+    route_table_id = aws_route_table.private[0].id
 }
 
 # ********************************************************************
 # Public Subnet
 
 resource "aws_subnet" "public_subnets" {
-    count = local.len_public_subnets
+    count = local.create_public_subnet ? local.len_public_subnets : 0
 
     vpc_id = aws_vpc.default.id
 
@@ -67,6 +79,8 @@ resource "aws_subnet" "public_subnets" {
 }
 
 resource "aws_route_table" "public" {
+    count = local.create_public_subnet ? 1 : 0
+
     vpc_id = aws_vpc.default.id
     
     tags = {
@@ -75,14 +89,16 @@ resource "aws_route_table" "public" {
 }
 
 resource "aws_route_table_association" "public" {
-    count = local.len_public_subnets
+    count = local.create_public_subnet ? local.len_public_subnets : 0
     
     subnet_id = element(aws_subnet.public_subnets[*].id, count.index)
 
-    route_table_id = aws_route_table.public.id
+    route_table_id = aws_route_table.public[0].id
 }
 
 resource "aws_internet_gateway" "app" { 
+    count = local.create_public_subnet ? 1 : 0
+
     vpc_id = aws_vpc.default.id
 
     tags = {
@@ -91,9 +107,9 @@ resource "aws_internet_gateway" "app" {
 }
 
 resource "aws_route" "public_internet_gateway" {
-    route_table_id = aws_route_table.public.id
+    route_table_id = aws_route_table.public[0].id
 
-    gateway_id = aws_internet_gateway.app.id
+    gateway_id = aws_internet_gateway.app[0].id
 
     destination_cidr_block = "0.0.0.0/0"
 }

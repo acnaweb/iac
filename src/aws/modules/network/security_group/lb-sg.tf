@@ -1,5 +1,5 @@
 resource "aws_security_group" "lb" {
-    name = "${var.project_name}-${var.environment}"
+    name = "${var.project_name}-${var.environment}-lb-sg"
 
     vpc_id = var.vpc_id
   
