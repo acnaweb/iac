@@ -18,16 +18,16 @@ resource "aws_security_group" "app" {
     description = "App security group"
 }
 
-resource "aws_security_group_rule" "app_ssh" {
-    security_group_id = aws_security_group.app.id
+# resource "aws_security_group_rule" "app_ssh" {
+#     security_group_id = aws_security_group.app.id
     
-    type = "ingress"
-    protocol = "tcp"
-    from_port = 22
-    to_port = 22
-    cidr_blocks = ["0.0.0.0/0"]
-    description = "SSH connection"
-}
+#     type = "ingress"
+#     protocol = "tcp"
+#     from_port = 22
+#     to_port = 22
+#     cidr_blocks = ["0.0.0.0/0"]
+#     description = "SSH connection"
+# }
 
 resource "aws_security_group_rule" "all_ingress" {
     count = length(var.target_ports)

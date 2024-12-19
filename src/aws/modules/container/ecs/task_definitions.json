@@ -1,0 +1,16 @@
+[
+    {
+        "name": "${container_name}",
+        "image": "gkoenig/simplehttp",
+        "environment": [{
+            "message": "Uhuuuu"
+        }],
+        "essential": true,
+        "portMappings": [{
+        "containerPort": 8000,
+        "hostport     ": 8000,
+        "protocol     ": "tcp",
+        "appProtocol  ": "http"
+        }]
+    }
+]
