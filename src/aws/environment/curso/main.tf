@@ -18,20 +18,19 @@ module "security-group" {
     environment = var.environment
     vpc_id = module.vpc.vpc_id
     target_ports = var.target_ports  
-
 }
 
-# module "load-balancer" {
-#     source = "../../modules/network/load_balancer"  
-#     depends_on = [ module.security-group, module.vpc ]
+module "load-balancer" {
+    source = "../../modules/network/load_balancer"  
+    depends_on = [ module.security-group, module.vpc ]
 
-#     project_name = var.project_name
-#     environment = var.environment
-#     vpc_id = module.vpc.vpc_id
-#     public_subnets = module.vpc.public_subnets
-#     security_group_id = module.security-group.lb_sg_id
-#     target_ports = var.target_ports  
-# }
+    project_name = var.project_name
+    environment = var.environment
+    vpc_id = module.vpc.vpc_id
+    public_subnets = module.vpc.public_subnets
+    security_group_id = module.security-group.lb_sg_id
+    target_ports = var.target_ports  
+}
 
 module "ecs" {
     source = "../../modules/container/ecs"
@@ -41,5 +40,5 @@ module "ecs" {
     environment = var.environment
     vpc_id = module.vpc.vpc_id
     public_subnets = module.vpc.public_subnets
-    security_group_id = module.security-group.app_sg_id
+    security_group_id = module.security-group.lb_sg_id
 }
