@@ -29,5 +29,17 @@ RUN mkdir Downloads && \
     unzip awscliv2.zip && \
     ./aws/install
 
+# Instalar o Azure CLI (para acessar a Azure)
+RUN curl -sL https://aka.ms/InstallAzureCLIDeb | bash
+
+# Instalar o gcloud CLI (para acessar a GCP)
+RUN cd Downloads && \
+    curl -O https://dl.google.com/dl/cloudsdk/channels/rapid/downloads/google-cloud-cli-linux-x86_64.tar.gz && \
+    tar -xf google-cloud-cli-linux-x86_64.tar.gz && \
+    ./google-cloud-sdk/install.sh -q 
+
+# source google-cloud-sdk/completion.bash.inc && \
+# source google-cloud-sdk/path.bash.inc
+
 # Definir o comando padrão para execução quando o container for iniciado
 CMD ["/bin/bash"]
