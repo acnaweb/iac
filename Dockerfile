@@ -61,6 +61,8 @@ RUN cd Downloads && \
 # Instalar o Databricks CLI
 RUN curl -fsSL https://raw.githubusercontent.com/databricks/setup-cli/main/install.sh | sh
 
+WORKDIR /shared
+
 # Definir o comando padrão para execução quando o container for iniciado
 CMD ["/bin/bash"]
 
