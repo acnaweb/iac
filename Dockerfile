@@ -8,7 +8,9 @@ LABEL maintainer="acnaweb"
 # Atualizar os pacotes do sistema e instalar dependências necessárias
 RUN apt-get update && \
     apt-get install -y git wget unzip curl \
-    openssh-client iputils-ping groff nano telnet
+    openssh-client iputils-ping groff nano telnet \
+    && apt-get clean \
+    && rm -rf /var/lib/apt/lists/*
 
 # *****************************************************
 # Criar a pasta /shared como um ponto de montagem para um volume
