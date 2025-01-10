@@ -15,6 +15,18 @@ docker build -t devops .
 docker run --name devops -it --rm -v ./shared:/shared devops /bin/bash
 ```
 
+### Gcloud Cli
+
+```sh
+gcloud auth activate-service-account SERVICE_ACCOUNT@DOMAIN.COM --key-file=/path/key.json --project=PROJECT_ID
+```
+
+Example
+
+```sh
+gcloud auth activate-service-account study-bigquery@study-gcp-398200.iam.gserviceaccount.com --key-file=/shared/secrets/study-bigquery.json --project=study-gcp-398200
+```
+
 ### AWS Cli
 
 ```sh
