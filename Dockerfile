@@ -7,7 +7,7 @@ LABEL maintainer="acnaweb"
 # *****************************************************
 # Atualizar os pacotes do sistema e instalar dependências necessárias
 RUN apt-get update && \
-    apt-get install -y --no-install-recommends \
+    apt-get install -y \
     build-essential \
     git wget unzip curl \
     openssh-client iputils-ping groff nano telnet && \
