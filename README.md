@@ -17,6 +17,8 @@ docker run --name devops -it --rm -v ./shared:/shared devops /bin/bash
 
 ### Gcloud Cli
 
+- https://cloud.google.com/sdk/gcloud/reference/
+
 ```sh
 gcloud auth activate-service-account SERVICE_ACCOUNT@DOMAIN.COM --key-file=/path/key.json --project=PROJECT_ID
 ```
