@@ -80,3 +80,7 @@ terraform graph
 - https://spacelift.io/blog/terraform-tags
 - https://spacelift.io/blog/terraform-best-practices
 - https://spacelift.io/blog/importing-exisiting-infrastructure-into-terraform
+
+## To Review
+
+Iniciar Cloud Shell com repo - https://ssh.cloud.google.com/cloudshell/editor?cloudshell_git_repo=https://github.com/barberosanto/bootcamp.git&cloudshell_git_branch=main
